@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>小宝的梦幻小屋</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            color: #4a148c;
+            font-family: '微软雅黑', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f8bbd0;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery img {
+            margin: 10px;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .signature {
+            margin: 20px;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+        .button {
+            background-color: #e1bee7;
+            border: none;
+            color: #4a148c;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ce93d8;
+        }
+        footer {
+            background-color: #f8bbd0;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>小宝的梦幻小屋</h1>
+    </header>
+    <div class="gallery">
+        <!-- 在这里添加你的P图作品 -->
+        <img src="你的图片链接1" alt="作品1">
+        <img src="你的图片链接2" alt="作品2">
+        <img src="你的图片链接3" alt="作品3">
+        <!-- 添加更多图片 -->
+    </div>
+    <div class="signature">
+        <!-- 个性签名 -->
+        今天也是充满梦想的一天！
+    </div>
+    <button class="button" onclick="showEasterEgg()">点我看看有什么惊喜</button>
+    <footer>
+        Loch最爱小宝
+    </footer>
+    <audio id="bgm" src="你的背景音乐链接" loop autoplay></audio>
+    <script>
+        function showEasterEgg() {
+            alert('Loch最爱小宝！');
+        }
+    </script>
+</body>
+</html>
