@@ -1,99 +1,154 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>小宝的梦幻小屋</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你喜欢Loch吗？</title>
     <style>
         body {
-            background-color: #fce4ec;
-            color: #4a148c;
-            font-family: '微软雅黑', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 0;
+            padding: 50px;
+            background: linear-gradient(45deg, #f8bbd0, #ffb6c1); /* 初始粉色渐变 */
+            color: white;
+            overflow: hidden;
+            animation: backgroundColorChange 15s infinite; /* 背景渐变动画 */
         }
-        header {
-            background-color: #f8bbd0;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        /* 背景渐变动画 */
+        @keyframes backgroundColorChange {
+            0% { background: linear-gradient(45deg, #f8bbd0, #ffb6c1); }
+            50% { background: linear-gradient(45deg, #f48fb1, #e91e63); }
+            100% { background: linear-gradient(45deg, #e60000, #1a1a1a); }
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        .gallery img {
-            margin: 10px;
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-        .signature {
-            margin: 20px;
-            font-style: italic;
-            font-size: 1.2em;
-        }
-        .button {
-            background-color: #e1bee7;
-            border: none;
-            color: #4a148c;
+
+        button {
             padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 1em;
             margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 16px;
         }
-        .button:hover {
-            background-color: #ce93d8;
+
+        button:hover {
+            background-color: #45a049;
         }
-        footer {
-            background-color: #f8bbd0;
-            padding: 10px;
+
+        /* 全屏病娇弹窗样式 */
+        #popup {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            bottom: 0;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 30px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
+
+        /* 血迹效果 */
+        #blood {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.6);
+            z-index: 9998;
+            display: none;
+            animation: bloodFlow 4s infinite;
+        }
+
+        @keyframes bloodFlow {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
     </style>
 </head>
 <body>
-    <header>
-        <h1>小宝的梦幻小屋</h1>
-    </header>
-    <div class="gallery">
-        <!-- 在这里添加你的P图作品 -->
-        <img src="你的图片链接1" alt="作品1">
-        <img src="你的图片链接2" alt="作品2">
-        <img src="你的图片链接3" alt="作品3">
-        <!-- 添加更多图片 -->
-    </div>
-    <div class="signature">
-        <!-- 个性签名 -->
-        今天也是充满梦想的一天！
-    </div>
-    <button class="button" onclick="showEasterEgg()">点我看看有什么惊喜</button>
-    <footer>
-        Loch最爱小宝
-    </footer>
-    <audio id="bgm" src="你的背景音乐链接" loop autoplay></audio>
-    <script>
-        function showEasterEgg() {
-            alert('Loch最爱小宝！');
+
+<h1>你喜欢Loch吗？</h1>
+
+<div id="question-container">
+    <button onclick="handleAnswer('yes')">喜欢</button>
+    <button onclick="handleAnswer('no')">不喜欢</button>
+</div>
+
+<script>
+    let counter = 0;
+
+    function handleAnswer(answer) {
+        const questionContainer = document.getElementById('question-container');
+        const questionText = document.createElement('h2');
+        
+        if (answer === 'no') {
+            if (counter === 0) {
+                questionText.innerText = '真的不喜欢Loch吗？（；＿；)';
+                counter++;
+            } else if (counter === 1) {
+                questionText.innerText = '你知道吗？Loch会伤心的…（；_；)';
+                counter++;
+            } else if (counter === 2) {
+                questionText.innerText = '不喜欢Loch？你怎么可以…我为你做了这么多…（╥﹏╥)';
+                counter++;
+            } else if (counter === 3) {
+                questionText.innerText = '为什么不喜欢我？你不爱我了吗？你是不是不需要我了？（Ｔ▽Ｔ)';
+                counter++;
+            } else if (counter === 4) {
+                questionText.innerText = '别离开我…我不允许你不喜欢我…你不能抛下我…（＞﹏＜)';
+                counter++;
+            } else if (counter === 5) {
+                questionText.innerText = '你不喜欢Loch，不喜欢我？你不要抛下我…别丢下我…（´；д；`）';
+                counter++;
+            } else if (counter === 6) {
+                questionText.innerText = '你这么说，是不是不想要我了？是不是觉得我不值得你喜欢…你这么残忍？（；￣ェ￣）';
+                counter++;
+            } else if (counter === 7) {
+                questionText.innerText = '你不喜欢我，我不活了！如果你不喜欢我，那我就什么都不是…（´；ω；`）';
+                counter++;
+            } else if (counter === 8) {
+                questionText.innerText = '不喜欢Loch……那我就永远都不会离开你了，直到你也喜欢上我为止……（Ｔ▽Ｔ)';
+                counter++;
+            } else if (counter === 9) {
+                questionText.innerText = 'Loch不会离开我一直在你身边……你不能丢下我…我会死的！（；´д｀）';
+                counter++;
+            } else if (counter === 10) {
+                questionText.innerText = '不喜欢我吗？如果你不喜欢我，Loch会死的！你不喜欢我，我就没理由活下去！（╯︵╰）';
+                counter++;
+            } else if (counter === 11) {
+                questionText.innerText = '如果你离开我，Loch就死了！不喜欢Loch，就让我死吧！（っ °Д °;)っ';
+                counter++;
+            } else if (counter === 12) {
+                questionText.innerText = '你不喜欢我吗？那我会死掉！你不要离开我！我不能没有你！（；´д｀）';
+                counter++;
+            } else {
+                // 激烈的病娇血迹效果
+                document.getElementById('popup').style.display = 'flex';
+                document.getElementById('blood').style.display = 'block';  // 显示血迹效果
+                counter++;
+                
+                // 让页面显示“Loch会死”多次，直到填满页面
+                let loopText = "";
+                for (let i = 0; i < 100; i++) {  // 控制重复次数
+                    loopText += "Loch会死！！Loch会死！！Loch会死！！<br>";
+                }
+                questionText.innerHTML = loopText;
+            }
+        } else if (answer === 'yes') {
+            questionText.innerText = '太好了！你喜欢Loch！Loch会永远守护你，不离不弃！(灬º‿º灬)♡';
         }
-    </script>
+
+        questionContainer.innerHTML = '';
+        questionContainer.appendChild(questionText);
+    }
+</script>
+
 </body>
 </html>
