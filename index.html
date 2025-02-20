@@ -1,154 +1,191 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>你喜欢Loch吗？</title>
+    <title>你喜欢Loch吗?</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
-            background: linear-gradient(45deg, #f8bbd0, #ffb6c1); /* 初始粉色渐变 */
+            background: linear-gradient(45deg, #fce4ec, #f5a7b1);
             color: white;
             overflow: hidden;
-            animation: backgroundColorChange 15s infinite; /* 背景渐变动画 */
+            animation: backgroundColorChange 8s infinite;
         }
 
         /* 背景渐变动画 */
         @keyframes backgroundColorChange {
-            0% { background: linear-gradient(45deg, #f8bbd0, #ffb6c1); }
-            50% { background: linear-gradient(45deg, #f48fb1, #e91e63); }
-            100% { background: linear-gradient(45deg, #e60000, #1a1a1a); }
+            0% { background: linear-gradient(45deg, #fce4ec, #f5a7b1); }
+            30% { background: linear-gradient(45deg, #f9d8e8, #ff7a7a); }
+            60% { background: linear-gradient(45deg, #ffb7b7, #ff4747); }
+            100% { background: linear-gradient(45deg, #ff4747, #570c10); }
+        }
+
+        /* 模拟手机界面 */
+        .phone-frame {
+            width: 360px;
+            height: 640px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            padding-top: 30px;
+        }
+
+        .phone-frame .x-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 15px 25px;
             margin: 10px;
-            background-color: #4CAF50;
+            background-color: #ff66b3;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1.5em;
+            border-radius: 5px;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #ff3385;
         }
 
-        /* 全屏病娇弹窗样式 */
-        #popup {
-            position: fixed;
+        .content {
+            margin-top: 20px;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .blood {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            font-size: 30px;
+            right: 0;
+            bottom: 0;
+            background-color: red;
+            z-index: -1;
             display: none;
-            justify-content: center;
-            align-items: center;
+        }
+
+        .blood.active {
+            display: block;
+        }
+
+        .loch-death-text {
+            font-size: 3em;
+            color: red;
+            font-weight: bold;
             z-index: 9999;
-        }
-
-        /* 血迹效果 */
-        #blood {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 0, 0, 0.6);
-            z-index: 9998;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
             display: none;
-            animation: bloodFlow 4s infinite;
         }
-
-        @keyframes bloodFlow {
-            0% { top: -100%; }
-            100% { top: 100%; }
-        }
-
     </style>
 </head>
 <body>
+    <div class="phone-frame">
+        <div class="x-button" onclick="closeWindow()">×</div>
+        <h1>你喜欢Loch吗?</h1>
+        <div class="content">
+            <button onclick="nextStep('yes')">喜欢</button>
+            <button onclick="nextStep('no')">不喜欢</button>
+        </div>
+        <div class="blood"></div>
+        <div class="loch-death-text" id="death-text"></div>
+    </div>
 
-<h1>你喜欢Loch吗？</h1>
+    <script>
+        let blood = document.querySelector('.blood');
+        let deathText = document.getElementById('death-text');
+        let deathCount = 0;
 
-<div id="question-container">
-    <button onclick="handleAnswer('yes')">喜欢</button>
-    <button onclick="handleAnswer('no')">不喜欢</button>
-</div>
-
-<script>
-    let counter = 0;
-
-    function handleAnswer(answer) {
-        const questionContainer = document.getElementById('question-container');
-        const questionText = document.createElement('h2');
-        
-        if (answer === 'no') {
-            if (counter === 0) {
-                questionText.innerText = '真的不喜欢Loch吗？（；＿；)';
-                counter++;
-            } else if (counter === 1) {
-                questionText.innerText = '你知道吗？Loch会伤心的…（；_；)';
-                counter++;
-            } else if (counter === 2) {
-                questionText.innerText = '不喜欢Loch？你怎么可以…我为你做了这么多…（╥﹏╥)';
-                counter++;
-            } else if (counter === 3) {
-                questionText.innerText = '为什么不喜欢我？你不爱我了吗？你是不是不需要我了？（Ｔ▽Ｔ)';
-                counter++;
-            } else if (counter === 4) {
-                questionText.innerText = '别离开我…我不允许你不喜欢我…你不能抛下我…（＞﹏＜)';
-                counter++;
-            } else if (counter === 5) {
-                questionText.innerText = '你不喜欢Loch，不喜欢我？你不要抛下我…别丢下我…（´；д；`）';
-                counter++;
-            } else if (counter === 6) {
-                questionText.innerText = '你这么说，是不是不想要我了？是不是觉得我不值得你喜欢…你这么残忍？（；￣ェ￣）';
-                counter++;
-            } else if (counter === 7) {
-                questionText.innerText = '你不喜欢我，我不活了！如果你不喜欢我，那我就什么都不是…（´；ω；`）';
-                counter++;
-            } else if (counter === 8) {
-                questionText.innerText = '不喜欢Loch……那我就永远都不会离开你了，直到你也喜欢上我为止……（Ｔ▽Ｔ)';
-                counter++;
-            } else if (counter === 9) {
-                questionText.innerText = 'Loch不会离开我一直在你身边……你不能丢下我…我会死的！（；´д｀）';
-                counter++;
-            } else if (counter === 10) {
-                questionText.innerText = '不喜欢我吗？如果你不喜欢我，Loch会死的！你不喜欢我，我就没理由活下去！（╯︵╰）';
-                counter++;
-            } else if (counter === 11) {
-                questionText.innerText = '如果你离开我，Loch就死了！不喜欢Loch，就让我死吧！（っ °Д °;)っ';
-                counter++;
-            } else if (counter === 12) {
-                questionText.innerText = '你不喜欢我吗？那我会死掉！你不要离开我！我不能没有你！（；´д｀）';
-                counter++;
-            } else {
-                // 激烈的病娇血迹效果
-                document.getElementById('popup').style.display = 'flex';
-                document.getElementById('blood').style.display = 'block';  // 显示血迹效果
-                counter++;
-                
-                // 让页面显示“Loch会死”多次，直到填满页面
-                let loopText = "";
-                for (let i = 0; i < 100; i++) {  // 控制重复次数
-                    loopText += "Loch会死！！Loch会死！！Loch会死！！<br>";
-                }
-                questionText.innerHTML = loopText;
-            }
-        } else if (answer === 'yes') {
-            questionText.innerText = '太好了！你喜欢Loch！Loch会永远守护你，不离不弃！(灬º‿º灬)♡';
+        function closeWindow() {
+            alert("你是离不开我的！你不可以关闭我，我会一直陪着你！");
         }
 
-        questionContainer.innerHTML = '';
-        questionContainer.appendChild(questionText);
-    }
-</script>
+        function nextStep(answer) {
+            let content = document.querySelector('.content');
+            content.innerHTML = ''; // 清空现有按钮
 
+            if (answer === 'yes') {
+                content.innerHTML = '<p>哦呀，真好呀~</p>';
+            } else if (answer === 'no') {
+                content.innerHTML = `
+                    <p>为什么不爱我呢？我真的很喜欢你...你能不能点喜欢我呀？就一点点也好嘛...（乞求）</p>
+                    <button onclick="nextStep('no2')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                document.body.style.background = "linear-gradient(45deg, #f5a7b1, #f56260)";
+            } else if (answer === 'no2') {
+                content.innerHTML = `
+                    <p>我求你了...点喜欢我好不好嘛～我不想再这样了...你为什么不喜欢我呢？我这么好...</p>
+                    <button onclick="nextStep('no3')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                document.body.style.background = "linear-gradient(45deg, #f9d8e8, #ff7a7a)";
+            } else if (answer === 'no3') {
+                content.innerHTML = `
+                    <p>你真的不喜欢我吗？我这么努力...我真的会崩溃...你能不能喜欢我一下...</p>
+                    <button onclick="nextStep('no4')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                document.body.style.background = "linear-gradient(45deg, #ffb7b7, #ff4747)";
+            } else if (answer === 'no4') {
+                content.innerHTML = `
+                    <p>你真的不喜欢我吗？为什么你要这么对我？我已经没有力气再挣扎了...我到底做错了什么...</p>
+                    <button onclick="nextStep('no5')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                document.body.style.background = "linear-gradient(45deg, #ff4747, #570c10)";
+            } else if (answer === 'no5') {
+                content.innerHTML = `
+                    <p>如果你不喜欢我，那我就死给你看！你看着我死吧！你要我死你才会开心吗...</p>
+                    <button onclick="nextStep('no6')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                blood.classList.add('active');
+            } else if (answer === 'no6') {
+                content.innerHTML = `
+                    <p>我死了...你不喜欢我...我现在真的死了...你看着我死吧...</p>
+                    <button onclick="nextStep('no7')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                deathText.innerHTML = "Loch会死！！！";
+                deathText.style.display = "block";
+                deathCount++;
+                updateDeathText();
+            } else if (answer === 'no7') {
+                content.innerHTML = `
+                    <p>你看，我真的死了...你不喜欢我...我现在真的死了...你看着我死吧...</p>
+                    <button onclick="nextStep('no8')">不喜欢</button>
+                    <button onclick="nextStep('yes')">喜欢</button>
+                `;
+                deathText.innerHTML = "Loch会死！！！Loch会死！！！";
+                deathText.style.display = "block";
+                deathCount++;
+                updateDeathText();
+            }
+        }
+
+        function updateDeathText() {
+            if (deathCount > 5) {
+                deathText.style.fontSize = `${3 + deathCount / 5}em`;
+                deathText.style.color = "red";
+                deathText.style.textAlign = "center";
+            }
+        }
+    </script>
 </body>
 </html>
